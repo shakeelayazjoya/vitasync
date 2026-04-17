@@ -2,7 +2,7 @@ import axios from "axios";
 import { TOKEN_KEY } from "@/utils/constants";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_URL || "https://vitasync-k8a1.vercel.app/api",
   headers: { "Content-Type": "application/json" },
 });
 
