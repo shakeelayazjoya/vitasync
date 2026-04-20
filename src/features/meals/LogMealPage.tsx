@@ -28,6 +28,15 @@ const LogMealPage = () => {
   const [selectedFamilyMemberId, setSelectedFamilyMemberId] = useState("self");
   const [familyMemberName, setFamilyMemberName] = useState("Self");
   const [familyMemberRelationship, setFamilyMemberRelationship] = useState("self");
+  // Relationship options
+  const relationshipOptions = [
+    { value: "self", label: "Self" },
+    { value: "wife", label: "Wife" },
+    { value: "husband", label: "Husband" },
+    { value: "child", label: "Child" },
+    { value: "parent", label: "Parent" },
+    { value: "other", label: "Other" },
+  ];
   const [familyMemberCalorieGoal, setFamilyMemberCalorieGoal] = useState(1800);
   const [bodyEnergy, setBodyEnergy] = useState(4);
   const [bodyMood, setBodyMood] = useState("good");
@@ -329,11 +338,13 @@ const LogMealPage = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="self">Self</SelectItem>
-                      {familyMembers.map((member) => (
-                        <SelectItem key={member.id} value={member.id}>
-                          {member.name}
-                        </SelectItem>
-                      ))}
+                      {familyMembers
+                        .filter((member) => member.name?.toLowerCase() !== "self")
+                        .map((member) => (
+                          <SelectItem key={member.id} value={member.id}>
+                            {member.name}
+                          </SelectItem>
+                        ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -348,12 +359,19 @@ const LogMealPage = () => {
                       <SelectValue placeholder="Select relationship" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="self">Self</SelectItem>
-                      <SelectItem value="wife">Wife</SelectItem>
-                      <SelectItem value="husband">Husband</SelectItem>
-                      <SelectItem value="child">Child</SelectItem>
-                      <SelectItem value="parent">Parent</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      {selectedFamilyMemberId === "self"
+                        ? relationshipOptions.map((opt) => (
+                            <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                          ))
+                        : (() => {
+                            const member = familyMembers.find((m) => m.id === selectedFamilyMemberId);
+                            if (member) {
+                              const rel = member.relationship ?? "other";
+                              const label = relationshipOptions.find((opt) => opt.value === rel)?.label || rel;
+                              return <SelectItem value={rel}>{label}</SelectItem>;
+                            }
+                            return null;
+                          })()}
                     </SelectContent>
                   </Select>
                 </div>

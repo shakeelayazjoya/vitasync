@@ -1,43 +1,93 @@
-import { Activity } from "lucide-react";
-import logoIcon from "@/assets/logo-icon.png";
+import { Leaf, Mail, MapPin, Phone } from "lucide-react";
+import whitelogo from "../../../public/nutrisynclogo.png";
 
 const Footer = () => (
-  <footer id="contact" className="bg-dark text-dark-foreground py-16 px-4">
-    <div className="container-narrow">
-      <div className="grid md:grid-cols-4 gap-10 mb-12">
-        <div className="md:col-span-1">
-          <a href="#" className="flex items-center gap-2 mb-4">
-            <img src={logoIcon} alt="VitaSync" className="h-7 w-7" width={28} height={28} />
-            <span className="text-lg font-bold">VitaSync</span>
+  <footer id="contact" className="bg-zinc-950 text-zinc-400 pt-20 pb-12 relative overflow-hidden">
+    {/* Subtle green accent glow */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
+
+    <div className="container-narrow px-6">
+      <div className="grid md:grid-cols-12 gap-12 mb-16">
+        {/* Brand Column */}
+        <div className="md:col-span-5">
+          <a href="#" className="flex items-center gap-3 mb-6">
+            <img 
+              src={whitelogo} 
+              alt="NutriSync" 
+              className="h-14 w-auto" 
+            />
           </a>
-          <p className="text-sm text-dark-foreground/60 leading-relaxed">
-            Your body's operating system. Built in Pakistan 🇵🇰 for healthier lives.
+          
+          <p className="text-lg leading-relaxed text-zinc-300 max-w-md">
+            Pakistan's smartest AI-powered nutrition companion. 
+            Understanding every desi meal — from biryani to nihari.
           </p>
+
+          <div className="flex items-center gap-2 mt-8 text-emerald-500">
+            <Leaf className="h-5 w-5" />
+            <span className="font-medium text-sm tracking-wider">MADE FOR PAKISTAN 🇵🇰</span>
+          </div>
         </div>
 
-        {[
-          { title: "Product", links: ["Features", "Pricing", "Dashboard", "AI Coach"] },
-          { title: "Company", links: ["About", "Blog", "Careers", "Press"] },
-          { title: "Support", links: ["Help Center", "Privacy Policy", "Terms of Service", "Contact Us"] },
-        ].map((col) => (
-          <div key={col.title}>
-            <h4 className="font-bold text-sm mb-4">{col.title}</h4>
-            <ul className="space-y-2.5">
-              {col.links.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm text-dark-foreground/60 hover:text-primary transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {/* Quick Links */}
+        <div className="md:col-span-3">
+          <h4 className="text-white font-semibold text-lg mb-6">Product</h4>
+          <ul className="space-y-4">
+            {["Features", "How it Works", "Pricing", "AI Coach", "Dashboard"].map((item) => (
+              <li key={item}>
+                <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} 
+                   className="hover:text-white transition-colors duration-200">
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="md:col-span-2">
+          <h4 className="text-white font-semibold text-lg mb-6">Company</h4>
+          <ul className="space-y-4">
+            {["About Us", "Blog", "Careers", "Press"].map((item) => (
+              <li key={item}>
+                <a href="#" className="hover:text-white transition-colors duration-200">
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="md:col-span-2">
+          <h4 className="text-white font-semibold text-lg mb-6">Support</h4>
+          <ul className="space-y-4">
+            {["Help Center", "Contact Us", "Privacy Policy", "Terms of Service"].map((item) => (
+              <li key={item}>
+                <a href="#" className="hover:text-white transition-colors duration-200">
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      <div className="border-t border-dark-foreground/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-dark-foreground/50">© 2026 VitaSync. All rights reserved.</p>
-        <p className="text-sm text-dark-foreground/50">Built with ❤️ in Pakistan 🇵🇰</p>
+      {/* Bottom Section */}
+      <div className="border-t border-white/10 pt-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="text-sm text-zinc-500">
+            © 2026 NutriSync. All rights reserved.
+          </div>
+
+          <div className="flex items-center gap-8 text-sm">
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-white transition-colors">Security</a>
+          </div>
+
+          <div className="flex items-center gap-2 text-sm text-zinc-500">
+            Built with ❤️ in <span className="text-emerald-400 font-medium">, Pakistan</span>
+          </div>
+        </div>
       </div>
     </div>
   </footer>

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/useAuth";
-import whitelogo from "../../../public/vitasyndark.png";
+import whitelogo from "../../../public/nutrisynclogo.png";
 
 
 const navItems = [
@@ -35,7 +35,7 @@ const SidebarContent = ({ onClose }: { onClose?: () => void }) => {
     <div className="flex flex-col h-full bg-dark text-dark-foreground">
       {/* Logo */}
       <div className="flex items-center gap-2.5 px-5 h-16 border-b border-sidebar-border">
-        <img src={whitelogo} alt="VitaSync Logo" className="h-36 w-auto" />
+         <img src={whitelogo} alt="NutriSyncLogo" className="h-10 w-auto" />
         {onClose && (
           <Button variant="ghost" size="icon" className="ml-auto text-dark-foreground/60 hover:text-dark-foreground" onClick={onClose}>
             <X className="h-5 w-5" />

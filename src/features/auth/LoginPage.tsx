@@ -52,7 +52,7 @@ const LoginPage = () => {
             </div>
           </div>
           <h1 className="text-2xl font-bold text-foreground">Welcome back</h1>
-          <p className="text-muted-foreground text-sm">Sign in to your VitaSync account</p>
+          <p className="text-muted-foreground text-sm">Sign in to your NutriSync account</p>
         </CardHeader>
 
         <form onSubmit={handleSubmit}>

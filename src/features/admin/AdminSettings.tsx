@@ -12,7 +12,7 @@ const AdminSettings = () => (
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <Label>App Name</Label>
-          <Input defaultValue="VitaSync" />
+          <Input defaultValue="NutriSync" />
         </div>
         <div className="space-y-2">
           <Label>Support Email</Label>

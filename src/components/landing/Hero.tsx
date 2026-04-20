@@ -1,103 +1,188 @@
-import { ArrowRight, Play, Flame, Droplets, Zap, TrendingUp } from "lucide-react";
+import { ArrowRight, Play, Flame, Droplets, Zap, TrendingUp, Leaf } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const CalorieRing = () => (
-  <div className="relative w-32 h-32">
+  <div className="relative w-40 h-40">
     <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90">
-      <circle cx="60" cy="60" r="52" fill="none" stroke="hsla(0,0%,100%,0.15)" strokeWidth="8" />
-      <circle cx="60" cy="60" r="52" fill="none" stroke="hsl(var(--primary))" strokeWidth="8" strokeLinecap="round"
-        strokeDasharray={`${2 * Math.PI * 52 * 0.72} ${2 * Math.PI * 52}`} />
+      <circle 
+        cx="60" cy="60" r="52" 
+        fill="none" 
+        stroke="#1f2937" 
+        strokeWidth="10" 
+      />
+      <circle 
+        cx="60" cy="60" r="52" 
+        fill="none" 
+        stroke="#22c55e" 
+        strokeWidth="10" 
+        strokeLinecap="round"
+        strokeDasharray={`${2 * Math.PI * 52 * 0.72} ${2 * Math.PI * 52}`} 
+        className="transition-all duration-700"
+      />
     </svg>
-    <div className="absolute inset-0 flex flex-col items-center justify-center">
-      <Flame className="h-4 w-4 text-primary mb-0.5" />
-      <span className="text-lg font-bold text-dark-foreground font-mono">0</span>
-      <span className="text-[10px] text-dark-foreground/60">/ 2,000 kcal</span>
+    
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+      <div className="flex items-center gap-1.5 mb-1">
+        <Flame className="h-5 w-5 text-orange-400" />
+        <span className="text-xs font-medium tracking-widest text-emerald-400">TODAY</span>
+      </div>
+      <span className="text-2xl font-bold text-white font-mono tracking-tighter">1,440</span>
+      <span className="text-sm text-white/70 -mt-1">/ 2,000 kcal</span>
+      <div className="mt-2 flex items-center gap-1.5 text-emerald-400 text-xs font-semibold">
+        <Leaf className="h-4 w-4" /> 72% • On Track
+      </div>
     </div>
   </div>
 );
 
-const MacroBar = ({ label, value, max, color }: { label: string; value: number; max: number; color: string }) => (
-  <div className="space-y-1">
-    <div className="flex justify-between text-xs">
-      <span className="text-dark-foreground/60">{label}</span>
-      <span className="font-medium text-dark-foreground font-mono">{value}g / {max}g</span>
+const MacroBar = ({ 
+  label, 
+  value, 
+  max, 
+  color 
+}: { 
+  label: string; 
+  value: number; 
+  max: number; 
+  color: string;
+}) => (
+  <div className="space-y-2">
+    <div className="flex justify-between text-sm text-white/80">
+      <span>{label}</span>
+      <span className="font-mono text-white">
+        {value}<span className="text-white/50">/{max}g</span>
+      </span>
     </div>
-    <div className="h-2 bg-dark-foreground/10 rounded-full overflow-hidden">
-      <div className={`h-full rounded-full ${color}`} style={{ width: `${(value / max) * 100}%` }} />
+    <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+      <div 
+        className={`h-full rounded-full transition-all duration-700 ${color}`}
+        style={{ width: `${(value / max) * 100}%` }}
+      />
     </div>
   </div>
 );
 
 const DashboardMock = () => (
-  <div className="bg-dark/60 backdrop-blur-xl rounded-2xl border border-dark-foreground/10 p-5 w-full max-w-sm animate-float shadow-2xl">
-    <div className="flex items-center gap-4 mb-5">
+  <div className="bg-zinc-900/95 backdrop-blur-3xl rounded-3xl border border-emerald-500/30 p-8 w-full max-w-sm shadow-2xl relative overflow-hidden">
+    {/* Top glow */}
+    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent" />
+
+    <div className="flex items-start gap-8 mb-10">
       <CalorieRing />
-      <div className="flex-1 space-y-3">
-        <MacroBar label="Protein" value={85} max={120} color="bg-primary" />
-        <MacroBar label="Carbs" value={180} max={250} color="bg-secondary" />
-        <MacroBar label="Fat" value={45} max={65} color="bg-accent" />
+      
+      <div className="flex-1 space-y-6 pt-3">
+        <MacroBar label="Protein" value={98} max={130} color="bg-emerald-500" />
+        <MacroBar label="Carbs" value={172} max={245} color="bg-lime-500" />
+        <MacroBar label="Fat" value={48} max={68} color="bg-green-500" />
       </div>
     </div>
-    <div className="grid grid-cols-3 gap-2">
+
+    <div className="grid grid-cols-3 gap-4">
       {[
-        { icon: Droplets, label: "Water", val: "6/8 glasses", color: "text-secondary" },
-        { icon: Zap, label: "Energy", val: "High", color: "text-primary" },
-        { icon: TrendingUp, label: "Streak", val: "12 days", color: "text-accent" },
+        { icon: Droplets, label: "WATER", val: "7/8", color: "text-sky-400" },
+        { icon: Zap, label: "ENERGY", val: "High", color: "text-lime-400" },
+        { icon: TrendingUp, label: "STREAK", val: "15", color: "text-emerald-400" },
       ].map(({ icon: Icon, label, val, color }) => (
-        <div key={label} className="bg-dark-foreground/5 rounded-xl p-2.5 text-center">
-          <Icon className={`h-4 w-4 mx-auto mb-1 ${color}`} />
-          <p className="text-[10px] text-dark-foreground/50">{label}</p>
-          <p className="text-xs font-semibold text-dark-foreground">{val}</p>
+        <div 
+          key={label} 
+          className="bg-zinc-950/80 border border-white/10 hover:border-emerald-500/40 rounded-2xl p-5 text-center transition-all group"
+        >
+          <Icon className={`h-6 w-6 mx-auto mb-3 ${color} group-hover:scale-110 transition-transform`} />
+          <p className="text-[10px] tracking-[1px] text-white/50 font-medium">{label}</p>
+          <p className="text-2xl font-semibold text-white mt-1">{val}</p>
         </div>
       ))}
+    </div>
+
+    <div className="mt-8 text-center text-xs text-emerald-400/80">
+      Last logged: Chicken Biryani • 620 kcal
     </div>
   </div>
 );
 
 const Hero = () => (
-  <section className="relative min-h-screen flex items-center overflow-hidden">
+  <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0a0f0a]">
+    {/* Background */}
     <div className="absolute inset-0">
-      <img src={heroBg} alt="" className="w-full h-full object-cover" width={1920} height={1080} />
-      <div className="absolute inset-0 bg-dark/60" />
+      <img 
+        src={heroBg} 
+        alt="NutriSync Hero Background" 
+        className="w-full h-full object-cover opacity-60" 
+        width={1920} 
+        height={1080} 
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0f0a] via-[#0a0f0a]/95 to-black/90" />
     </div>
-    <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[120px]" />
-    <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/15 rounded-full blur-[150px]" />
 
-    <div className="container-narrow relative z-10 grid md:grid-cols-2 gap-12 items-center px-4 pt-20">
-      <div className="animate-fade-up">
-        <div className="inline-flex items-center gap-2 bg-primary/15 backdrop-blur-sm text-primary text-sm font-medium px-4 py-1.5 rounded-full mb-6 border border-primary/20">
-          <Zap className="h-3.5 w-3.5" /> Your Body's Operating System
+    {/* Decorative green glows */}
+    <div className="absolute top-32 left-10 w-[500px] h-[500px] bg-emerald-600/15 rounded-full blur-[140px]" />
+    <div className="absolute bottom-20 right-10 w-[600px] h-[600px] bg-lime-500/10 rounded-full blur-[160px]" />
+
+    <div className="container-narrow relative z-10 grid md:grid-cols-2 gap-16 items-center px-6 pt-24 pb-20">
+      {/* Left Content */}
+      <div className="space-y-10">
+        {/* Top Badge */}
+        <div className="inline-flex items-center gap-2 bg-emerald-900/60 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-sm font-medium px-6 py-2.5 rounded-full">
+          <Leaf className="h-4 w-4" />
+          AI-Powered • Desi Food Expert
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-dark-foreground mb-6">
-          Understand Your Body,{" "}
-          <span className="gradient-text">Not Just Calories</span>
+
+        {/* Headline */}
+        <h1 className="text-6xl md:text-7xl font-bold leading-[1.05] tracking-[-2.5px] text-white">
+          Smart Nutrition for{" "}
+          <span className="bg-gradient-to-r from-emerald-400 via-lime-400 to-emerald-300 bg-clip-text text-transparent">
+            Real Pakistani Lives
+          </span>
         </h1>
-        <p className="text-lg text-dark-foreground/70 max-w-lg mb-8 leading-relaxed">
-          Pakistan's first AI-powered nutrition platform that understands desi food — from biryani to nihari.
-          Track meals, monitor your body's response, and get personalized insights.
+
+        {/* Description */}
+        <p className="text-xl text-zinc-300 max-w-lg leading-relaxed">
+          NutriSync tracks biryani, nihari, paratha, and every desi meal with accuracy. 
+          Get personalized AI insights, macro goals, and health streaks that actually fit your lifestyle.
         </p>
+
+        {/* Buttons */}
         <div className="flex flex-wrap gap-4">
           <Link to="/register">
-            <Button className="rounded-xl px-8 py-6 text-base font-semibold shadow-lg shadow-primary/30">
-              Get Started Free <ArrowRight className="ml-2 h-4 w-4" />
+            <Button 
+              size="lg"
+              className="rounded-2xl px-10 py-7 text-lg font-semibold bg-emerald-500 hover:bg-emerald-600 text-black shadow-2xl shadow-emerald-500/40 transition-all active:scale-[0.97]"
+            >
+              Get Started Free <ArrowRight className="ml-3 h-5 w-5" />
             </Button>
           </Link>
-          <Button variant="outline" className="rounded-xl px-8 py-6 text-base font-semibold border-primary/40 text-primary hover:bg-primary/10 backdrop-blur-sm">
-            <Play className="mr-2 h-4 w-4" /> Watch Demo
+
+          <Button 
+            variant="outline" 
+            size="lg"
+            className="bg-transparentrounded-2xl px-9 py-7 text-lg font-semibold border-white/30 text-white hover:bg-white/10 hover:border-white/40 backdrop-blur-md flex items-center gap-3"
+          >
+            <Play className="h-5 w-5" /> Watch Demo
           </Button>
         </div>
-        <div className="mt-10 flex items-center gap-6 text-dark-foreground/40 text-sm">
-          <span>✓ Free forever plan</span>
-          <span>✓ No credit card</span>
-          <span>✓ 10k+ users</span>
+
+        {/* Trust Signals */}
+        <div className="flex items-center gap-8 text-sm text-zinc-400">
+          <div className="flex items-center gap-2">
+            ✓ Free Plan Forever
+          </div>
+          <div className="flex items-center gap-2">
+            ✓ No Credit Card
+          </div>
+          <div>15,000+ Pakistanis tracking daily</div>
         </div>
       </div>
-      <div className="flex justify-center animate-fade-up animate-fade-up-delay-2">
+
+      {/* Right Side - Dashboard */}
+      <div className="flex justify-center pt-10 md:pt-0">
         <DashboardMock />
       </div>
     </div>
+
+    {/* Bottom fade */}
+    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0f0a] to-transparent" />
   </section>
 );
 

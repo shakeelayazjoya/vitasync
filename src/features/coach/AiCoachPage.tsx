@@ -53,7 +53,7 @@ const AiCoachPage = () => {
             <Bot className="h-5 w-5 text-accent" />
           </div>
           <div>
-            <h2 className="font-bold text-foreground">VitaSync AI Coach</h2>
+            <h2 className="font-bold text-foreground">NutriSyncAI Coach</h2>
             <Badge variant="outline" className="text-[10px] border-accent/30 text-accent">Powered by AI</Badge>
           </div>
         </div>

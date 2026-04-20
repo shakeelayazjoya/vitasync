@@ -14,6 +14,7 @@ import { navItems } from "./Sidebar";
 import { NavLink } from "react-router-dom";
 import { Dna, LogOut, Settings, User, X } from "lucide-react";
 import { useState } from "react";
+import whitelogo from "../../../public/vitasyndark.png";
 
 const pageTitles: Record<string, string> = {
   "/dashboard": "Dashboard",
@@ -31,7 +32,7 @@ const TopBar = () => {
   const { user, logout } = useAuth();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const title = pageTitles[location.pathname] || "VitaSync";
+  const title = pageTitles[location.pathname] || "NutriSync";
 
   return (
     <header className="fixed top-0 right-0 left-0 md:left-60 h-16 bg-card border-b border-border z-30 flex items-center justify-between px-4 md:px-6">
@@ -46,8 +47,8 @@ const TopBar = () => {
           <SheetContent side="left" className="p-0 w-60 border-none">
             <div className="flex flex-col h-full bg-dark text-dark-foreground">
               <div className="flex items-center gap-2.5 px-5 h-16 border-b border-sidebar-border">
-                <Dna className="h-7 w-7 text-primary" />
-                <span className="text-lg font-bold">VitaSync</span>
+                <img src={whitelogo} alt="NutriSyncLogo" className="h-36 w-auto" />
+
                 <Button variant="ghost" size="icon" className="ml-auto text-dark-foreground/60" onClick={() => setMobileOpen(false)}>
                   <X className="h-5 w-5" />
                 </Button>
@@ -60,9 +61,8 @@ const TopBar = () => {
                       key={item.path}
                       to={item.path}
                       onClick={() => setMobileOpen(false)}
-                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        isActive ? "bg-primary/10 text-primary border-l-2 border-primary" : "text-dark-foreground/60 hover:text-dark-foreground hover:bg-dark-card"
-                      }`}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive ? "bg-primary/10 text-primary border-l-2 border-primary" : "text-dark-foreground/60 hover:text-dark-foreground hover:bg-dark-card"
+                        }`}
                     >
                       <item.icon className="h-4 w-4 shrink-0" />
                       {item.label}

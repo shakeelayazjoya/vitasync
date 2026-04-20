@@ -1,97 +1,123 @@
-import { UtensilsCrossed, Activity, Bot, Users, Brain, FileText } from "lucide-react";
+'use client'
+
+import {
+  UtensilsCrossed,
+  Activity,
+  Bot,
+  Users,
+  Brain,
+  FileText,
+} from "lucide-react";
 import featuresIllustration from "@/assets/features-illustration.png";
 
 const features = [
   {
     icon: UtensilsCrossed,
     title: "Desi Food Tracking",
-    description: "Log biryani, roti, nihari, and 500+ Pakistani dishes with accurate macros — no more guessing.",
-    color: "text-primary",
-    bg: "bg-primary/10",
+    description:
+      "Log biryani, nihari, paratha, haleem & 850+ Pakistani dishes with accurate macros.",
   },
   {
     icon: Activity,
-    title: "Body Response Tracking",
-    description: "Track energy, mood, digestion, and sleep after meals. Understand how food truly affects you.",
-    color: "text-secondary",
-    bg: "bg-secondary/10",
+    title: "Body Response",
+    description:
+      "Track energy, mood, digestion & sleep after every meal.",
   },
   {
     icon: Bot,
     title: "AI Health Coach",
-    description: "Get personalized advice based on your patterns. Like having a nutritionist in your pocket.",
-    color: "text-accent",
-    bg: "bg-accent/10",
+    description:
+      "Smart personalized advice based on your lifestyle.",
   },
   {
     icon: Users,
     title: "Family Profiles",
-    description: "Track nutrition for your whole family — kids, elders, and everyone in between.",
-    color: "text-primary",
-    bg: "bg-primary/10",
+    description:
+      "Manage nutrition for your entire family in one place.",
   },
   {
     icon: Brain,
     title: "Smart Insights",
-    description: "AI-powered pattern detection reveals hidden connections between your diet and well-being.",
-    color: "text-secondary",
-    bg: "bg-secondary/10",
+    description:
+      "Discover patterns between food and health.",
   },
   {
     icon: FileText,
     title: "Doctor Reports",
-    description: "Export detailed nutrition and health reports as PDF — perfect for doctor visits.",
-    color: "text-accent",
-    bg: "bg-accent/10",
+    description:
+      "Generate PDF reports for professionals.",
   },
 ];
 
-const Features = () => (
-  <section id="features" className="section-padding bg-background relative overflow-hidden">
-    {/* Subtle gradient orb */}
-    <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-[100px]" />
+const Features = () => {
+  return (
+    <section className="relative py-24 bg-background overflow-hidden">
+      
+      {/* Background Glow */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 blur-[120px] rounded-full" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 blur-[120px] rounded-full" />
 
-    <div className="container-narrow relative">
-      <div className="text-center max-w-2xl mx-auto mb-8">
-        <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">Features</p>
-        <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
-          Everything You Need for{" "}
-          <span className="gradient-text">Better Health</span>
-        </h2>
-        <p className="text-muted-foreground text-lg">
-          Built specifically for Pakistani lifestyles, VitaSync goes beyond calorie counting.
-        </p>
-      </div>
+      <div className="container mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 items-center">
 
-      {/* Illustration */}
-      <div className="flex justify-center mb-12">
-        <img
-          src={featuresIllustration}
-          alt="Pakistani family enjoying healthy food together"
-          className="w-full max-w-md rounded-2xl"
-          loading="lazy"
-          width={800}
-          height={800}
-        />
-      </div>
+        {/* LEFT CONTENT */}
+        <div>
+          <p className="text-primary font-semibold uppercase tracking-widest mb-3 text-sm">
+            Features
+          </p>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {features.map((f, i) => (
-          <div
-            key={f.title}
-            className="glass-card-hover p-6 group animate-fade-up"
-            style={{ animationDelay: `${i * 0.1}s`, opacity: 0, animationFillMode: "forwards" }}
-          >
-            <div className={`${f.bg} w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-              <f.icon className={`h-6 w-6 ${f.color}`} />
+          <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+            A Smarter Way to <br />
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Track Your Health
+            </span>
+          </h2>
+
+          <p className="text-muted-foreground text-lg mb-8">
+            NutriSync is designed for Pakistani lifestyles — combining AI,
+            nutrition science, and real-life habits into one powerful experience.
+          </p>
+
+          <img
+            src={featuresIllustration}
+            alt="Healthy lifestyle"
+            className="rounded-2xl shadow-xl w-full max-w-md"
+          />
+        </div>
+
+        {/* RIGHT SIDE - FLOATING CARDS */}
+        <div className="relative grid grid-cols-2 gap-6">
+
+          {features.map((f, i) => (
+            <div
+              key={i}
+              className={`
+                relative p-[1px] rounded-2xl 
+                bg-gradient-to-br from-primary/40 to-accent/40
+                hover:scale-105 transition-all duration-300
+                ${i % 2 === 0 ? "translate-y-6" : "-translate-y-6"}
+              `}
+            >
+              <div className="bg-background/80 backdrop-blur-xl rounded-2xl p-5 h-full shadow-lg hover:shadow-2xl transition">
+
+                <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-primary/10 mb-4">
+                  <f.icon className="w-6 h-6 text-primary" />
+                </div>
+
+                <h3 className="font-bold text-lg mb-2">
+                  {f.title}
+                </h3>
+
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {f.description}
+                </p>
+              </div>
             </div>
-            <h3 className="text-lg font-bold text-foreground mb-2">{f.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{f.description}</p>
-          </div>
-        ))}
+          ))}
+
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Features;

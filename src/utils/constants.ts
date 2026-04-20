@@ -1,4 +1,4 @@
-export const APP_NAME = "VitaSync";
+export const APP_NAME = "NutriSync";
 export const TOKEN_KEY = "vitasync_token";
 export const USER_KEY = "vitasync_user";
 

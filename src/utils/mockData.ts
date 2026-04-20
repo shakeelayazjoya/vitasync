@@ -94,7 +94,7 @@ export const mockWeeklyData = [
 ];
 
 export const mockCoachMessages = [
-  { id: "c1", role: "ai" as const, text: "Assalam o Alaikum Ahmed! 👋 I'm your VitaSync AI Coach. I noticed you've been tracking your meals consistently — great work!", timestamp: "10:00 AM" },
+  { id: "c1", role: "ai" as const, text: "Assalam o Alaikum Ahmed! 👋 I'm your NutriSyncAI Coach. I noticed you've been tracking your meals consistently — great work!", timestamp: "10:00 AM" },
   { id: "c2", role: "user" as const, text: "I feel bloated after drinking chai with milk. Any suggestions?", timestamp: "10:02 AM" },
   { id: "c3", role: "ai" as const, text: "That's a common response! Your body might be sensitive to full-fat dairy. Try switching to low-fat milk or green tea for a week. I'll track your digestion pattern to confirm. 🍵", timestamp: "10:03 AM" },
   { id: "c4", role: "user" as const, text: "What should I eat before my morning workout?", timestamp: "10:05 AM" },

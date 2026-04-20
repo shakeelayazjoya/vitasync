@@ -1,58 +1,112 @@
+'use client'
+
 import { UtensilsCrossed, HeartPulse, Sparkles } from "lucide-react";
 
 const steps = [
   {
     icon: UtensilsCrossed,
     title: "Log Your Meals",
-    description: "Search or scan your desi meals. Our database knows the difference between Karachi biryani and Lahori biryani.",
+    description:
+      "Search or scan desi meals. We understand Karachi vs Lahori biryani — not just calories, but context.",
     color: "text-primary",
-    bg: "bg-primary/10",
-    ring: "ring-primary/20",
   },
   {
     icon: HeartPulse,
     title: "Track Body Response",
-    description: "Log how you feel — energy, mood, digestion, sleep. Build a complete picture of your health.",
+    description:
+      "Log energy, mood, digestion & sleep. Build a real understanding of how food affects you.",
     color: "text-secondary",
-    bg: "bg-secondary/10",
-    ring: "ring-secondary/20",
   },
   {
     icon: Sparkles,
     title: "Get AI Insights",
-    description: "Our AI connects the dots and gives you personalized, actionable recommendations.",
+    description:
+      "AI connects patterns and gives clear, personalized recommendations for your lifestyle.",
     color: "text-accent",
-    bg: "bg-accent/10",
-    ring: "ring-accent/20",
   },
 ];
 
-const HowItWorks = () => (
-  <section id="how-it-works" className="section-padding bg-card">
-    <div className="container-narrow">
-      <div className="text-center max-w-2xl mx-auto mb-16">
-        <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">How It Works</p>
-        <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
-          Three Simple Steps to{" "}
-          <span className="gradient-text">Better Health</span>
-        </h2>
-      </div>
+const HowItWorks = () => {
+  return (
+    <section className="relative py-28 bg-background overflow-hidden">
 
-      <div className="grid md:grid-cols-3 gap-8 relative">
-        <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-primary via-secondary to-accent opacity-20" />
-        {steps.map((s, i) => (
-          <div key={s.title} className="text-center relative animate-fade-up" style={{ animationDelay: `${i * 0.15}s`, opacity: 0, animationFillMode: "forwards" }}>
-            <div className={`${s.bg} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 ring-4 ${s.ring} relative z-10`}>
-              <s.icon className={`h-7 w-7 ${s.color}`} />
-            </div>
-            <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block">Step {i + 1}</span>
-            <h3 className="text-xl font-bold text-foreground mb-2">{s.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">{s.description}</p>
+      {/* Background Glow */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-72 h-72 bg-primary/10 blur-[120px] rounded-full" />
+
+      <div className="max-w-6xl mx-auto px-6">
+
+        {/* HEADER */}
+        <div className="text-center mb-20">
+          <p className="text-primary font-semibold uppercase tracking-widest text-sm mb-3">
+            How It Works
+          </p>
+
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+            Your Health Journey <br />
+            <span className="bg-gradient-to-r from-primary to-accent text-transparent bg-clip-text">
+              in 3 Simple Steps
+            </span>
+          </h2>
+
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+            No confusion. No complex tracking. Just a simple system designed for
+            real Pakistani lifestyles.
+          </p>
+        </div>
+
+        {/* TIMELINE */}
+        <div className="relative">
+
+          {/* Vertical Line */}
+          <div className="absolute left-1/2 -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary via-secondary to-accent opacity-20 rounded-full" />
+
+          <div className="space-y-20">
+            {steps.map((step, i) => {
+              const isLeft = i % 2 === 0;
+
+              return (
+                <div
+                  key={i}
+                  className={`flex flex-col md:flex-row items-center ${
+                    isLeft ? "md:flex-row-reverse" : ""
+                  }`}
+                >
+                  {/* CARD */}
+                  <div className="md:w-1/2">
+                    <div className="relative group p-[1px] rounded-2xl bg-gradient-to-br from-primary/40 to-accent/40 hover:scale-105 transition-all duration-300">
+                      <div className="bg-background/80 backdrop-blur-xl p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
+
+                        <span className="text-xs uppercase tracking-widest text-muted-foreground block mb-2">
+                          Step {i + 1}
+                        </span>
+
+                        <h3 className="text-xl font-bold mb-2">
+                          {step.title}
+                        </h3>
+
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CENTER ICON */}
+                  <div className="relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-background border-4 border-primary/20 shadow-lg">
+                    <step.icon className={`w-7 h-7 ${step.color}`} />
+                  </div>
+
+                  {/* EMPTY SPACE */}
+                  <div className="md:w-1/2" />
+                </div>
+              );
+            })}
           </div>
-        ))}
+        </div>
+
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default HowItWorks;
